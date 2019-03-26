@@ -18,6 +18,12 @@ int main() {
 		array[i] = 0;
 	}
 
+	clock_t c_start = clock();
+	numeros_primos(array, n);
+	clock_t c_end = clock();
+
+	double time_elapsed_ms = 1000.0 * (c_end - c_start) / CLOCKS_PER_SEC;
+	cout << "CPU time used: " << time_elapsed_ms << " ms\n";
 
 	/*auto start = chrono::system_clock::now();
 	numeros_primos(array, n);
@@ -40,11 +46,11 @@ int main() {
 	std::chrono::duration<double> elapsed_seconds = final1 - inicio1;
 
 	cout << res1 << endl;*/
-	
-	
+
+
 	//numeros_primos(array, n);
 
-	
+
 	/*for (int i = 0; i < n; i++) {
 		cout << array[i] << ", ";
 	}*/
@@ -87,15 +93,15 @@ void numeros_primos(int arra[], int n)
 		mov ebx, 1; numero
 		mov ecx, 0; contador
 
-		mov edx, arra;edx contiene la direccion del arra
+		mov edx, arra; edx contiene la direccion del arra
 
 
 		while:
 		cmp ecx, eax; contador > n
 			jae fin_while
 
-			push ecx			; se mete en la pila contador
-			mov ecx, 2			; i del for
+			push ecx; se mete en la pila contador
+			mov ecx, 2; i del for
 
 			push eax; se mete n en la pila
 
@@ -103,43 +109,43 @@ void numeros_primos(int arra[], int n)
 
 
 			for:
-			cmp ecx, ebx;   i del for < numero
+		cmp ecx, ebx;   i del for < numero
 			jae fin_for
 
 
 			; numero / i
-					mov al, bl; mover a al la parte baja de el numero
-					
-					mov ah, 0
-				
-					div cl
+			mov al, bl; mover a al la parte baja de el numero
 
-					inc ecx
-					cmp ah, 0
-					je fin_for_no_es_primo
+			mov ah, 0
+
+			div cl
+
+			inc ecx
+			cmp ah, 0
+			je fin_for_no_es_primo
 
 			jmp for
 			fin_for:
 
 
-			; añadir al vector
+		; añadir al vector
 			pop eax;
-			pop ecx; ecx es ahora el contador
-				
-				mov [edx], ebx
-				
-				inc ecx; incrementar uno a la variable
+		pop ecx; ecx es ahora el contador
+
+			mov[edx], ebx
+
+			inc ecx; incrementar uno a la variable
 
 
-				add arra,4
+			add arra, 4
 
-				mov edx, arra
+			mov edx, arra
 
 			jmp while
 
 			fin_for_no_es_primo :
-			pop eax;
-			pop ecx; ecx es ahora el contador
+		pop eax;
+		pop ecx; ecx es ahora el contador
 
 
 			jmp while
